@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from "svelte";
-	const url = "https://random.dog/woof.json";
+	const url = "https://random.dog/woof.json"; // https://github.com/public-apis/public-apis
 
 	let dogs = [];
 
