@@ -1,56 +1,95 @@
 <script>
 	import { onMount } from "svelte";
-	const url = "https://random.dog/woof.json"; // https://github.com/public-apis/public-apis
 
-	let dogs = [];
+	const url = "http://api.tvmaze.com/shows"; // https://github.com/public-apis/public-apis
 
-	const amountOfCalls = [...Array(21).keys()].slice(1);
+	import Nav from "./components/nav.svelte";
+	import Card from "./components/card.svelte";
+	import Search from "./components/search.svelte";
 
+	let shows = [];
+
+	const defaultShow = {
+		id: 1,
+		url: "http://www.tvmaze.com/shows/1/under-the-dome",
+		name: "Under the Dome",
+		type: "Scripted",
+		language: "English",
+		genres: ["Drama", "Science-Fiction", "Thriller"],
+		status: "Ended",
+		runtime: 60,
+		premiered: "2013-06-24",
+		officialSite: "http://www.cbs.com/shows/under-the-dome/",
+		schedule: {
+			time: "22:00",
+			days: ["Thursday"],
+		},
+		rating: {
+			average: 6.5,
+		},
+		weight: 97,
+		network: {
+			id: 2,
+			name: "CBS",
+			country: {
+				name: "United States",
+				code: "US",
+				timezone: "America/New_York",
+			},
+		},
+		webChannel: null,
+		externals: {
+			tvrage: 25988,
+			thetvdb: 264492,
+			imdb: "tt1553656",
+		},
+		image: {
+			medium:
+				"http://static.tvmaze.com/uploads/images/medium_portrait/81/202627.jpg",
+			original:
+				"http://static.tvmaze.com/uploads/images/original_untouched/81/202627.jpg",
+		},
+		summary:
+			"<p><b>Under the Dome</b> is the story of a small town that is suddenly and inexplicably sealed off from the rest of the world by an enormous transparent dome. The town's inhabitants must deal with surviving the post-apocalyptic conditions while searching for answers about the dome, where it came from and if and when it will go away.</p>",
+		updated: 1573667713,
+		_links: {
+			self: {
+				href: "http://api.tvmaze.com/shows/1",
+			},
+			previousepisode: {
+				href: "http://api.tvmaze.com/episodes/185054",
+			},
+		},
+	};
+		
+	 shows.push(defaultShow);
+	 shows.push(defaultShow);
+	 shows.push(defaultShow);
+	 shows.push(defaultShow);
+	 shows.push(defaultShow);
+	 shows.push(defaultShow);
+
+	
 	onMount(async () => {
-		dogs = await Promise.all(
-			amountOfCalls.map(async (key) => {
-				console.log(key);
-				const res = await fetch(url);
-				return res.json();
-			})
-		);
+//   const result = await fetch(url);
+//   shows = await result.json();
+//   console.log(shows);
 	});
 </script>
 
-<style>
-	.dogs {
-		width: 100%;
-		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		grid-gap: 8px;
-	}
-
-	figure,
-	img {
-		width: 100%;
-		height: 100%;
-		margin: 0;
-		object-fit: contain;
-	}
-
-	figure {
-		box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-	}
-</style>
-
 <main>
-	<h1>What makes you happy?</h1>
-
-	<div class="dogs">
-		{#each dogs as dog}
-			<figure class="shadow-xs">
-				<img src={dog.url} alt={"Image not found, sorry!"} />
-				<!-- <figcaption>{dog.name}</figcaption> -->
-			</figure>
-		{:else}
-			<!-- this block renders when dogs.length === 0 -->
-			<p>let me think...</p>
+	<Nav />
+	<header class="bg-white flex justify-between">
+		<div class="max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
+			<h1 class="text-3xl font-bold leading-tight text-gray-900">
+				Series
+			</h1>
+		</div>
+		<Search />
+	</header>
+	<body class="antialiased font-sans flex flex-wrap mb-4">
+		{#each shows as show}
+			<Card show={show}/>
 		{/each}
-	</div>
-
+	</body>
 </main>
