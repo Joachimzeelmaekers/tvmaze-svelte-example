@@ -1,7 +1,7 @@
 <script>
 	import { onMount } from "svelte";
 
-	const BASE_URL = "http://api.tvmaze.com"; // https://github.com/public-apis/public-apis
+	const BASE_URL = "https://api.tvmaze.com"; // https://github.com/public-apis/public-apis
 
 	import Nav from "./components/nav.svelte";
 	import Card from "./components/card.svelte";

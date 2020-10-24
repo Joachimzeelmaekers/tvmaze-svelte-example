@@ -54,6 +54,7 @@
                 {/if}
             </p>
             <a
+                href="/"
                 on:click={toggleShowFullDescription}
                 class="my-6 text-blue-500 hover:text-blue-800">
                 {#if !showFullDescription}
