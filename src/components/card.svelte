@@ -4,12 +4,12 @@
     export let show = {};
     const placeFiller = "...";
     const { image, name: title, rating, summary, genres, officialSite } = show;
-    const shortSummary = summary.slice(0, 100) + placeFiller;
+    const shortSummary = (summary || "").slice(0, 100) + placeFiller;
 
     let showFullDescription = false;
 
     const amountOfFilledStars = Math.round(rating.average  / 2);
-    console.log(amountOfFilledStars);
+
     const stars = [
         ...new Array(amountOfFilledStars).fill(1),
         ...new Array((5 - amountOfFilledStars)).fill(0),
@@ -25,13 +25,18 @@
 </script>
 
 <style>
+
+    .image-container {
+        display: flex;
+        flex-grow: 1;
+    }
     .image {
         max-height: 200px;
         object-fit: contain;
     }
 </style>
 
-<div class="w-1/4 p-2">
+<div class="image-container w-1/4 max-w-sm p-2">
     <div
         class="container rounded overflow-hidden shadow-lg hover:shadow-2xl cursor-pointer pt-1">
         <img

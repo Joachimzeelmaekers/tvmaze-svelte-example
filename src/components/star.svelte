@@ -1,6 +1,5 @@
 <script>
     export let filled = false;
-    console.log(filled);
     const filledClass = `text-${filled ? "yellow-600" : "gray-400"}`;
 </script>
 
